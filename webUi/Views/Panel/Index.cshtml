@@ -1,0 +1,63 @@
+@model List<Products>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şehir Teknolojileri Merkezi</title>
+    <link rel="stylesheet" href="~/content/bootstrap/dist/css/bootstrap.css">
+
+</head>
+
+<body>
+    @await Html.PartialAsync("_Panelnavbar")
+    <div class="container">
+        <div class="row mt-4">            
+            <div class="col-10"></div>
+            <div class="col-2">
+                <form method="post">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Ürün ara" name="search">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">ara</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="message mt-2">
+            @if (TempData["message"] != null)
+            {
+                <partial name="_ResultMessage" model="@(TempData.Get<AlertMessage>("message"))" />
+            }
+        </div>
+
+        
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="row my-4 border p-3">
+                    <div class="col-3">
+                        <img src="~/images/products/@item.ProductImageUrl" class="img-fluid rounded-start">
+                    </div>
+                    <div class="col-9">
+                        <div class="card-body">
+                            <h4 class="card-title"> @item.ProductName</h4>
+                            <p class="card-text">Fiyat = @item.ProductPrice TL</p>
+                            <a href="~/panel/editproduct/@item.Id" class="btn btn-primary">Ürünü Güncelle</a>
+                            <a href="~/panel/removeproduct/@item.Id" class="btn btn-danger">Ürünü Sil</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

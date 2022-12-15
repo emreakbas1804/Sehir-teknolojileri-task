@@ -1,0 +1,41 @@
+@model List<Products>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şehir Teknolojileri Merkezi</title>
+    <link rel="stylesheet" href="~/content/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+    @await Html.PartialAsync("_navbar")
+    <div class="container">
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                <div class="row mt-5 border p-3">
+                    <div class="col-3">
+                        <img src="~/images/products/@item.ProductImageUrl" class="img-fluid rounded-start">
+                    </div>
+                    <div class="col-9">
+                        <div class="card-body">
+                            <h4 class="card-title"> @item.ProductName</h4>
+                            <p class="card-text">Fiyat =  @item.ProductPrice TL</p>
+                            <a href="~/home/productdetails/@item.Id" class="btn btn-primary">Ürün Detayı</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

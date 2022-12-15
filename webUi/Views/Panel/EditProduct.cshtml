@@ -1,0 +1,60 @@
+@model Products
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şehir Teknolojileri Merkezi Ürün Ekle</title>
+    <link rel="stylesheet" href="~/content/bootstrap/dist/css/bootstrap.css">
+
+</head>
+
+<body>
+    @await Html.PartialAsync("_Panelnavbar")
+    <div class="container">
+        <div class="message mt-2">
+            @if (TempData["message"] != null)
+            {
+                <partial name="_ResultMessage" model="@(TempData.Get<AlertMessage>("message"))" />
+            }
+        </div>
+        <div class="row mt-5">
+
+            <form method="post" enctype="multipart/form-data" asp-action="editproduct" asp-controller="panel">
+                
+                <input type="hidden" asp-for="Id">
+                <div class="form-group">
+                    <label for="name">Ürün İsmi</label>
+                    <input type="text" class="form-control" id="name" asp-for="ProductName">
+                </div>
+
+                <div class="form-group my-3">
+                    <label for="price">Ürün Fiyatı</label>
+                    <input type="text" class="form-control" id="price" asp-for="ProductPrice">
+                </div>
+
+                <div class="form-group my-3">
+                    <label for="description">Ürün Açıklaması</label>
+                    <input type="text" class="form-control" id="description" asp-for="ProductDesciription">
+                </div>
+
+                <div class="form-group my-3">
+                    <label for="image">Ürün Görseli</label>
+                    <input type="hidden" asp-for="ProductImageUrl">
+                    <input type="file" name="file" class="form-control" id="image">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Ürünü güncelle</button>
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>

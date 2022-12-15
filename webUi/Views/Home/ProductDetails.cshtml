@@ -1,0 +1,45 @@
+@model Products
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şehir Teknolojileri Merkezi</title>
+    <link rel="stylesheet" href="~/content/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+    @await Html.PartialAsync("_navbar")
+    <div class="container">
+        <div class="message">
+            @if (TempData["message"] != null)
+            {
+                <partial name="_ResultMessage" model="@(TempData.Get<AlertMessage>("message"))" />
+            }
+        </div>
+        @if (Model != null)
+        {
+            <div class="row">
+                <div class="row mt-5 border p-3">
+                    <div class="col-3">
+                        <img src="~/images/products/@Model.ProductImageUrl" class="img-fluid rounded-start">
+                    </div>
+                    <div class="col-9">
+                        <div class="card-body">
+                            <h4 class="card-title"> @Model.ProductName</h4>
+                            <span>Fiyat = @Model.ProductPrice TL</span>
+                            <p class="card-text"> @Model.ProductDesciription</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+
+</body>
+
+</html>

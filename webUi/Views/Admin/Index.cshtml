@@ -1,0 +1,60 @@
+@model List<User>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şehir Teknolojileri Merkezi</title>
+    <link rel="stylesheet" href="~/content/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+    @await Html.PartialAsync("_AdminPanelnavbar")
+    <div class="container">
+
+        <div class="message mt-2">
+            @if (TempData["message"] != null)
+            {
+                <partial name="_ResultMessage" model="@(TempData.Get<AlertMessage>("message"))" />
+            }
+        </div>
+
+
+        <div class="row mt-5">
+
+            <table class="table table-striped table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Ad Soyad</th>
+                        <th>Mail Adresi</th> 
+                        <th>Profili Düzenle</th>                       
+                        <th></th> 
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.FullName</td>
+                            <td>@item.Email</td>                            
+                            <td><a href="~/admin/updateprofile/@item.Id" class="btn btn-sm btn-primary">Düzenle</a></td> 
+                            <td><a href="~/admin/deleteUser/@item.Id" class="btn btn-sm btn-danger">Kullanıcıyı Sil</a></td> 
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
